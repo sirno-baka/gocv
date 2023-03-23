@@ -111,3 +111,20 @@ bool Stream_QueryIfComplete(Stream s) {
 void Stream_WaitForCompletion(Stream s) {
     s->waitForCompletion();
 }
+
+struct DMatches CudaMultiDMatches_get(struct MultiDMatches mds, int index) {
+    return mds.dmatches[index];
+}
+
+void CudaDMatches_Close(struct DMatches ds) {
+    delete[] ds.dmatches;
+}
+
+void CudaMultiDMatches_Close(struct MultiDMatches mds) {
+    for (size_t i = 0; i < mds.length; i++) {
+        CudaDMatches_Close(mds.dmatches[i]);
+    }
+
+    delete[] mds.dmatches;
+}
+

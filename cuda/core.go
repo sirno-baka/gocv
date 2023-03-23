@@ -28,3 +28,27 @@ func toRectangles(ret C.Rects) []image.Rectangle {
 	}
 	return rects
 }
+
+type KeyPoint struct {
+	X, Y                  float64
+	Size, Angle, Response float64
+	Octave, ClassID       int
+}
+
+func getKeyPoints(ret C.KeyPoints) []KeyPoint {
+	cArray := ret.keypoints
+	length := int(ret.length)
+	hdr := reflect.SliceHeader{
+		Data: uintptr(unsafe.Pointer(cArray)),
+		Len:  length,
+		Cap:  length,
+	}
+	s := *(*[]C.KeyPoint)(unsafe.Pointer(&hdr))
+
+	keys := make([]KeyPoint, length)
+	for i, r := range s {
+		keys[i] = KeyPoint{float64(r.x), float64(r.y), float64(r.size), float64(r.angle), float64(r.response),
+			int(r.octave), int(r.classID)}
+	}
+	return keys
+}

@@ -45,6 +45,10 @@ void Stream_Close(Stream s);
 bool Stream_QueryIfComplete(Stream s);
 void Stream_WaitForCompletion(Stream s);
 
+void CudaDMatches_Close(struct DMatches ds);
+void CudaMultiDMatches_Close(struct MultiDMatches mds);
+struct DMatches CudaMultiDMatches_get(struct MultiDMatches mds, int index);
+
 #ifdef __cplusplus
 }
 #endif
