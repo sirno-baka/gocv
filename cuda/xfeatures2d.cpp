@@ -1,7 +1,7 @@
 #include "xfeatures2d.h"
 
-CudaSURF CudaSURF_Create() {
-    return new cv::Ptr<cv::cuda::SURF_CUDA>(cv::cuda::SURF_CUDA::create(400));
+CudaSURF CudaSURF_Create(double threshold ) {
+    return new cv::Ptr<cv::cuda::SURF_CUDA>(cv::cuda::SURF_CUDA::create(threshold));
 }
 
 KeyPoints CudaSURF_DetectAndCompute(CudaSURF surf, GpuMat src, GpuMat mask, GpuMat desc){

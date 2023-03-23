@@ -22,7 +22,7 @@ typedef void* CudaSURF;
 typedef void* CudaBFMatcher;
 #endif
 
-CudaSURF CudaSURF_Create();
+CudaSURF CudaSURF_Create(double threshold);
 KeyPoints CudaSURF_DetectAndCompute(CudaSURF o, GpuMat src, GpuMat mask, GpuMat desc);
 
 CudaBFMatcher CudaBFMatcher_Create();

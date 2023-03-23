@@ -18,8 +18,8 @@ type SURF struct {
 }
 
 // NewSURF returns a new SURF
-func NewSURF() SURF {
-	return SURF{p: unsafe.Pointer(C.CudaSURF_Create())}
+func NewSURF(threshold float64) SURF {
+	return SURF{p: unsafe.Pointer(C.CudaSURF_Create(C.double(threshold)))}
 }
 
 func (o *SURF) DetectAndCompute(src GpuMat, mask GpuMat) ([]KeyPoint, GpuMat) {
