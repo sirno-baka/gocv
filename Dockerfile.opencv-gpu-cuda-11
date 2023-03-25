@@ -66,7 +66,7 @@ RUN curl -Lo opencv.zip ${OPENCV_FILE} && \
 FROM opencv-gpu-cuda-11-base AS opencv-gpu-cuda-11-golang
 
 ARG ARCH=amd64
-ENV ARCH ARCH
+ENV ARCH &ARCH
 ENV GO_RELEASE=1.19.4
 RUN wget https://dl.google.com/go/go${GO_RELEASE}.linux-${ARCH}.tar.gz && \
     tar xfv go${GO_RELEASE}.linux-${ARCH}.tar.gz -C /usr/local && \
