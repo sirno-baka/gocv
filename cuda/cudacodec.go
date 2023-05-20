@@ -7,7 +7,6 @@ package cuda
 */
 import "C"
 import (
-	"gocv.io/x/gocv"
 	"unsafe"
 )
 
@@ -61,16 +60,6 @@ func NewCudaVideoReader(filename string, dropFrames bool) CudaVideoReader {
 func (o *CudaVideoReader) NextFrame(frame GpuMat) bool {
 	ret := C.CudaVideoReader_nextFrame((C.CudaVideoReader)(o.p), frame.p)
 	return bool(ret)
-}
-
-// Set parameter with property (=key).
-func (v *CudaVideoReader) Set(prop gocv.VideoCaptureProperties, param float64) {
-	C.CudaVideoReader_Set((C.CudaVideoReader)(v.p), C.int(prop), C.double(param))
-}
-
-// Get parameter with property (=key).
-func (v CudaVideoReader) Get(prop gocv.VideoCaptureProperties) float64 {
-	return float64(C.CudaVideoReader_Get((C.CudaVideoReader)(v.p), C.int(prop)))
 }
 
 // Get parameter with property (=key).
