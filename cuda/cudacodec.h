@@ -16,11 +16,23 @@ typedef cv::Ptr<cv::cudacodec::VideoReader>* CudaVideoReader;
 #else
 typedef void* CudaVideoReader;
 #endif
+typedef struct FormatInfo {
+    int codec;
+    int chromaFormat;
+    int width;
+    int height;
+    int bitDepth;
+    int fps;
+} FormatInfo;
 
-CudaVideoReader CudaVideoReader_Create(const char* filename);
+
+CudaVideoReader CudaVideoReader_Create(const char* filename, bool dropFrames);
 
 bool CudaVideoReader_nextFrame(CudaVideoReader b, GpuMat frame);
 void CudaVideoReader_Close(CudaVideoReader b);
+void CudaVideoReader_Set(CudaVideoReader v, int prop, double param);
+double CudaVideoReader_Get(CudaVideoReader v, int prop);
+FormatInfo CudaVideoReader_Format(CudaVideoReader v);
 
 #ifdef __cplusplus
 }
