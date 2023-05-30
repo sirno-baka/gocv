@@ -20,11 +20,12 @@ KeyPoints CudaSURF_DetectAndCompute(CudaSURF surf, GpuMat src, GpuMat mask, GpuM
         kps[i] = k;
     }
     KeyPoints ret = {kps, (int)detected.size()};
-    delete[] ret.keypoints;
     return ret;
 }
 
-
+void deleteKeypoints(struct KeyPoints ks) {
+    delete[] ks.keypoints;
+}
 
 
 

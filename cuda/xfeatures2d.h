@@ -24,7 +24,7 @@ typedef void* CudaBFMatcher;
 
 CudaSURF CudaSURF_Create(double threshold);
 KeyPoints CudaSURF_DetectAndCompute(CudaSURF o, GpuMat src, GpuMat mask, GpuMat desc);
-
+void deleteKeypoints(struct KeyPoints ks);
 CudaBFMatcher CudaBFMatcher_Create();
 void CudaBFMatcher_Close(CudaBFMatcher b);
 struct MultiDMatches CudaBFMatcher_KnnMatch(CudaBFMatcher b, GpuMat query, GpuMat train, int k);

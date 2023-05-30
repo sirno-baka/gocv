@@ -25,6 +25,7 @@ func NewSURF(threshold float64) SURF {
 func (o *SURF) DetectAndCompute(src GpuMat, mask GpuMat) ([]KeyPoint, GpuMat) {
 	desc := NewGpuMat()
 	ret := C.CudaSURF_DetectAndCompute((C.CudaSURF)(o.p), src.p, mask.p, desc.p)
+	defer C.deleteKeypoints(ret)
 	return getKeyPoints(ret), desc
 }
 
