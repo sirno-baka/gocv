@@ -146,7 +146,7 @@ KeyPoints OrbDetect(Mat cvImage, Mat outDescriptors) {
     cv::Mat des(1, outDescriptorsData.buffer.aos.sizePointer, CV_8UC1, outDescriptorsData.buffer.aos.data);
 //    std::cout << des.cols << std::endl;
     (*outDescriptors) = des.clone();
-
+    des.release();
 //    VPIKeypointF32 *outKeypoints2 = (VPIKeypointF32 *)outKeypointsData.buffer.aos.data;
 //    VPIBriefDescriptor *outDescriptors2 = (VPIBriefDescriptor *) outDescriptorsData.buffer.aos.data;
 //    VPIImageData imgData;
