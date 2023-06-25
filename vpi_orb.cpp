@@ -62,7 +62,7 @@ static cv::Mat DrawKeypoints(cv::Mat img, VPIKeypointF32 *kpts, VPIBriefDescript
      return out;
  }
 
-void initOrb(const char* strBackend){
+void initOrb(const char* strBackend, int maxFeatures, int intensityThreshold){
          std::cout << strBackend << std::endl;
          if ( strcmp(strBackend, "cpu") == 0)
          {
@@ -98,7 +98,8 @@ void initOrb(const char* strBackend){
 
          orbParams.scoreType=VPI_CORNER_SCORE_HARRIS;
 //         orbParams.scoreType=VPI_CORNER_SCORE_FAST;
-         orbParams.maxFeatures=10000;
+         orbParams.maxFeatures=maxFeatures;
+         orbParams.fastParams.intensityThreshold = intensityThreshold;
          orbParams.pyramidLevels=3;
 
          be= VPI_BORDER_ZERO; //VPI_BORDER_CLAMP; //VPI_BORDER_ZERO
@@ -197,7 +198,7 @@ int mainTest()
 
      try
      {
-         initOrb("cuda");
+         initOrb("cuda", 10000, 5);
          // =====================
          // Load the input image
          cv::Mat cvImage;

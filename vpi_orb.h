@@ -39,7 +39,7 @@ static Mat DrawKeypoints(Mat img, VPIKeypointF32 *kpts, VPIBriefDescriptor *outD
 
 int mainTest();
 
-void initOrb(const char* strBackend);
+void initOrb(const char* strBackend, int maxFeatures, int intensityThreshold);
 KeyPoints OrbDetect(Mat cvImage, Mat descriptions);
 void clean();
 void destroy();
