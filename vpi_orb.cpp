@@ -96,8 +96,8 @@ void initOrb(const char* strBackend){
               //params.scoreType                     = VPI_CORNER_SCORE_HARRIS;
 
 
-         orbParams.scoreType=VPI_CORNER_SCORE_HARRIS;
-//         orbParams.scoreType=VPI_CORNER_SCORE_FAST;
+//         orbParams.scoreType=VPI_CORNER_SCORE_HARRIS;
+         orbParams.scoreType=VPI_CORNER_SCORE_FAST;
          orbParams.maxFeatures=10000;
          orbParams.pyramidLevels=3;
 
@@ -144,7 +144,8 @@ KeyPoints OrbDetect(Mat cvImage, Mat outDescriptors) {
     CHECK_STATUS(vpiArrayLockData(keypoints, VPI_LOCK_READ, VPI_ARRAY_BUFFER_HOST_AOS, &outKeypointsData));
     CHECK_STATUS(vpiArrayLockData(descriptors, VPI_LOCK_READ, VPI_ARRAY_BUFFER_HOST_AOS, &outDescriptorsData));
     cv::Mat des(1, outDescriptorsData.buffer.aos.sizePointer, CV_8UC1, outDescriptorsData.buffer.aos.data);
-    outDescriptors = &des;
+//    std::cout << des.cols << std::endl;
+    (*outDescriptors) = des.clone();
 
 //    VPIKeypointF32 *outKeypoints2 = (VPIKeypointF32 *)outKeypointsData.buffer.aos.data;
 //    VPIBriefDescriptor *outDescriptors2 = (VPIBriefDescriptor *) outDescriptorsData.buffer.aos.data;
