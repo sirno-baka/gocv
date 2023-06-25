@@ -297,7 +297,7 @@ func TestTemplateMatching_Match(t *testing.T) {
 	dest := gocv.NewMat()
 	defer dest.Close()
 
-	matcher := NewTemplateMatching(gocv.MatTypeCV8U, gocv.TmSqdiff)
+	matcher := NewTemplateMatching(int(gocv.MatTypeCV8U), gocv.TmSqdiff)
 	defer matcher.Close()
 
 	cimg.Upload(src)

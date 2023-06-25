@@ -21,6 +21,11 @@ ENV OPENCV_FILE $OPENCV_FILE
 ARG OPENCV_CONTRIB_FILE="https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip"
 ENV OPENCV_CONTRIB_FILE $OPENCV_CONTRIB_FILE
 
+COPY Video_Codec_SDK_11.0.10 Video_Codec_SDK_11.0.10
+RUN cp Video_Codec_SDK_11.0.10/Interface/* /usr/local/cuda/targets/x86_64-linux/include/
+#RUN cp Video_Codec_SDK_11.0.10/Lib/linux/stubs/x86_64/* /usr/lib/
+
+#    cp Video_Codec_SDK_11.0.10/Interface/* /usr/inlcude
 RUN curl -Lo opencv.zip ${OPENCV_FILE} && \
     unzip -q opencv.zip && \
     curl -Lo opencv_contrib.zip ${OPENCV_CONTRIB_FILE} && \
@@ -52,8 +57,10 @@ RUN curl -Lo opencv.zip ${OPENCV_FILE} && \
             -D ENABLE_FAST_MATH=1 \
             -D CUDA_FAST_MATH=1 \
             -D WITH_CUBLAS=1 \
+            -D CUDA_ARCH_BIN=7.0 \
+            -D BUILD_opencv_cudacodec=ON \
+            -D WITH_NVCUVID=ON \
             -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda/ \
-            -D BUILD_opencv_cudacodec=OFF \
             -D WITH_CUDNN=ON \
             -D OPENCV_DNN_CUDA=ON \
             -D CUDA_GENERATION=Auto \
