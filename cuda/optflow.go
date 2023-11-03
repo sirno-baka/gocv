@@ -30,3 +30,16 @@ func NewSparsePyrLKOpticalFlow() SparsePyrLKOpticalFlow {
 func (s SparsePyrLKOpticalFlow) Calc(prevImg, nextImg, prevPts, nextPts, status GpuMat) {
 	C.CudaSparsePyrLKOpticalFlow_Calc(C.CudaSparsePyrLKOpticalFlow(s.p), prevImg.p, nextImg.p, prevPts.p, nextPts.p, status.p)
 }
+
+type FarnebackOpticalFlow struct {
+	// C.CudaFarnebackOpticalFlow
+	p unsafe.Pointer
+}
+
+func NewFarnebackOpticalFlow(numLevels int) FarnebackOpticalFlow {
+	return FarnebackOpticalFlow{p: unsafe.Pointer(C.CudaFarnebackOpticalFlow_Create(C.int(numLevels)))}
+}
+
+func (s FarnebackOpticalFlow) Calc(prevImg, nextImg, flow GpuMat) {
+	C.CudaFarnebackOpticalFlow_Calc(C.CudaFarnebackOpticalFlow(s.p), prevImg.p, nextImg.p, flow.p)
+}

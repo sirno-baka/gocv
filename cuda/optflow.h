@@ -14,12 +14,18 @@ extern "C" {
 
 #ifdef __cplusplus
 typedef cv::Ptr<cv::cuda::SparsePyrLKOpticalFlow>* CudaSparsePyrLKOpticalFlow;
+typedef cv::Ptr<cv::cuda::FarnebackOpticalFlow>* CudaFarnebackOpticalFlow;
 #else
 typedef void* CudaSparsePyrLKOpticalFlow;
+typedef void* CudaFarnebackOpticalFlow;
 #endif
 
 CudaSparsePyrLKOpticalFlow CudaSparsePyrLKOpticalFlow_Create();
 void CudaSparsePyrLKOpticalFlow_Calc(CudaSparsePyrLKOpticalFlow p, GpuMat prevImg, GpuMat nextImg, GpuMat prevPts, GpuMat nextPts, GpuMat status);
+
+CudaFarnebackOpticalFlow CudaFarnebackOpticalFlow_Create(int numLevels);
+void CudaFarnebackOpticalFlow_Calc(CudaFarnebackOpticalFlow p, GpuMat prevImg, GpuMat nextImg, GpuMat flow);
+
 
 #ifdef __cplusplus
 }
